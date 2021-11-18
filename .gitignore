@@ -33,3 +33,8 @@
 # デバッグbinding.pryコマンド履歴
 /.local
 /.local/*
+
+/.DS_Store
+/.mysql_history
+
+/.guard_history

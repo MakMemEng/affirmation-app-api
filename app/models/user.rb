@@ -1,25 +1,22 @@
+require "validator/email_validator"
+
 class User < ApplicationRecord
   before_validation :downcase_email
   has_secure_password
 
-  VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   VALID_PASSWORD_REGEX = /\A[\w\-]+\z/
 
   validates :profile,  length: { maximum: 300 }
 
   with_options presence: true do
-    validates :name, length: {
-                      maximum: 30,
-                      allow_blank: true
+    validates :name,  length: {
+                        maximum: 30,
+                        allow_blank: true
                       }
-    validates :email,    length: { maximum: 255 },
-                          format: {
-                            with: VALID_EMAIL_REGEX,
+    validates :email,     email: { allow_blank: true }
+    validates :password,  length: {
+                            minimum: 8,
                             allow_blank: true
-                          },
-    validates :password, length: {
-                          minimum: 8,
-                          allow_blank: true
                           },
                           format: {
                             with: VALID_PASSWORD_REGEX,
