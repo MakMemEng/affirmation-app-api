@@ -3,6 +3,7 @@ require "validator/email_validator"
 class User < ApplicationRecord
   before_validation :downcase_email
   has_secure_password
+  attachment :profile_image
 
   VALID_PASSWORD_REGEX = /\A[\w\-]+\z/
 
