@@ -1,0 +1,26 @@
+inherit_from: .rubocop_todo.yml
+
+require:
+  - rubocop-rails
+# 対象外
+AllCops:
+  Exclude:
+    - "vendor/**/*"
+    - "bin/**"
+    - "db/schema.rb"
+    - "node_modules/**/*"
+    - "tmp/**/*"
+    - "lib/**/*"
+    - "config.ru"
+    - "db/**/*"
+    - "config/**/*"
+    - "script/**/*"
+    - "spec/**/*"
+    - "app/models/*"
+
+##################### Style ##################################
+
+# 日本語のコメントを許可する
+Style/AsciiComments:
+  Enabled: false
+
