@@ -6,6 +6,11 @@ class Api::V1::UsersController < ApplicationController
     render json: @users.as_json(only: [:id, :name, :email, :created_at])
   end
 
+  # def index
+  #   @users = User.first
+  #   render json: @users, each_serializer: UsersSerializer
+  # end
+
   def show
     @user = User.find(params[:id])
     render json: @user.as_json(only: [:id, :name, :email, :created_at])
