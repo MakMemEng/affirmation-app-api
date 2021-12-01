@@ -60,6 +60,6 @@ guard :rspec, cmd: "bundle exec rspec" do
   end
 end
 
-# guard :rubocop do
-guard :rubocop, all_on_start: false do
+# # guard :rubocop do
+# guard :rubocop, all_on_start: false do
 
