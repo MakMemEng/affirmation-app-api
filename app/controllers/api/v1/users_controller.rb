@@ -1,16 +1,16 @@
 class Api::V1::UsersController < ApplicationController
-  before_action :authenticate_user!, except: [:index]
-  before_action :ensure_normal_user, only: %i[update destroy]
+  before_action :authenticate_user
+  # before_action :ensure_normal_user, only: %i[update destroy]
+
+  def index
+    # @users = User.all
+    render json: current_user.as_json(only: [:id, :name, :email, :created_at])
+  end
 
   # def index
   #   @users = User.all
-  #   render json: @users.as_json(only: [:id, :name, :email, :created_at])
+  #   render json: @users, each_serializer: UsersSerializer
   # end
-
-  def index
-    @users = User.all
-    render json: @users, each_serializer: UsersSerializer
-  end
 
   def show
     @user = User.find(params[:id])

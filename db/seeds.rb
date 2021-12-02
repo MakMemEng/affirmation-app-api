@@ -4,13 +4,17 @@ User.create!(name: "Admin User",
   password: "admin0000",
   admin: true)
 
-50.times do |n|
-name = Faker::Name.name
-email = "user#{n+1}@example.com"
-password = "password"
-User.create!(name: name,
+10.times do |n|
+  name = Faker::Name.name
+  email = "user#{n+1}@example.com"
+  user = User.find_or_initialize_by(
     email: email,
-    password: password,
-    password_confirmation: password
-)
+    activated: true
+  )
+
+  if user.new_record?
+    user.name = name
+    user.password = "password"
+    user.save!
+  end
 end
