@@ -5,7 +5,7 @@ class Post < ApplicationRecord
   with_options presence: true do
     validates :title,     length: { maximum: 30 }
     validates :body,      length: { maximum: 400 }
-    validates :image
+    # validates :image
     validates :user_id
   end
 end

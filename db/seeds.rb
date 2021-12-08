@@ -1,20 +1,13 @@
-# メインのサンプルユーザーを1人作成する
-User.create!(name: "Admin User",
-  email: "admin0000@admin.com",
-  password: "admin0000",
-  admin: true)
+table_names = %w(
+  users
+)
 
-10.times do |n|
-  name = Faker::Name.name
-  email = "user#{n+1}@example.com"
-  user = User.find_or_initialize_by(
-    email: email,
-    activated: true
-  )
+table_names.each do |table_name|
+  path = Rails.root.join("db/seeds/#{Rails.env}/#{table_name}.rb")
 
-  if user.new_record?
-    user.name = name
-    user.password = "password"
-    user.save!
-  end
+  # ファイルが存在しない場合はdevelopmentディレクトリを読み込む
+  path = path.sub(Rails.env, "development") unless File.exist?(path)
+
+  puts "#{table_name}..."
+  require path
 end
