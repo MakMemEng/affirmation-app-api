@@ -1,5 +1,5 @@
 class Api::V1::PostController < ApplicationController
-  # before_action :authenticate_user!, except: [:index]
+  before_action :authenticate_user!, except: [:index]
 
   # N+1問題の対応
   def index
