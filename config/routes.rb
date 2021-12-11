@@ -10,8 +10,7 @@ Rails.application.routes.draw do
       end
 
       # affirmation_post
-      # resources :post, only:[:index, :create]
-      resources :post, only:[:index]
+      resources :post, only:[:index, :create]
 
     end
   end
