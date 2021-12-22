@@ -9,8 +9,10 @@ Rails.application.routes.draw do
         delete :destroy, on: :collection
       end
 
-      # affirmation_post
-      resources :post, only:[:index, :create]
+      # affirmation_posts
+      resources :posts ,only: [:index, :create, :destroy, :update] do
+        delete :destroy, on: :collection
+      end
 
     end
   end
