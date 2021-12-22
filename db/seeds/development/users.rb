@@ -1,8 +1,17 @@
 # メインのサンプルユーザーを1人作成する
-User.create!(name: "Admin User",
+User.create!(
+  name: "Admin User",
   email: "admin0000@admin.com",
   password: "admin0000",
-  admin: true)
+  admin: true
+)
+
+User.create!(
+  name: "Guest User",
+  email: "guest@example.com",
+  password: "guest0000",
+  admin: false
+)
 
 10.times do |n|
   name = Faker::Name.name
