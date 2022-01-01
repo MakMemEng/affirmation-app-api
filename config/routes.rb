@@ -10,9 +10,14 @@ Rails.application.routes.draw do
       end
 
       # affirmation_posts
-      resources :posts ,only: [:index, :create, :destroy, :update] do
+      resources :posts, only: [:index, :create, :destroy, :update] do
         delete :destroy, on: :collection
+        # comment
+        resources :comments, only: [:index, :create, :destroy] do
+          delete :destroy, on: :collection
+        end
       end
+
 
     end
   end
