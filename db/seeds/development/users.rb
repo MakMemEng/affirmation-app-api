@@ -1,5 +1,6 @@
 # メインのサンプルユーザーを1人作成する
 User.create!(
+  id: 1,
   name: "Admin User",
   email: "admin0000@admin.com",
   password: "admin0000",
@@ -7,13 +8,14 @@ User.create!(
 )
 
 User.create!(
+  id: 2,
   name: "Guest User",
   email: "guest@example.com",
   password: "guest0000",
   admin: false
 )
 
-10.times do |n|
+10.times do |n|+2
   name = Faker::Name.name
   email = "user#{n+1}@example.com"
   user = User.find_or_initialize_by(
