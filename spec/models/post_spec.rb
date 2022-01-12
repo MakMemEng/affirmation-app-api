@@ -4,31 +4,19 @@ RSpec.describe Post, type: :model do
   let(:user) { create(:user) }
   let(:post) { create(:post) }
 
-  describe '#index' do
-    it '正常にアクセスできること' do
-      get posts_path
-      expect(response).to have_http_status(200)
+  describe 'PostAPI' do
+    it '全てのポストを取得する' do
+      FactoryBot.create_list(:post, 10)
+
+      get '/api/v1/posts'
+      json = JSON.parse(response.body)
+
+      # リクエスト成功を表す200が返ってきたか確認する。
+      expect(response.status).to eq(200)
+
+      # 正しい数のデータが返されたか確認する。
+      expect(json['data'].length).to eq(10)
     end
   end
 
-  describe '#new' do
-    it '正常にアクセスできること' do
-      get new_post_path
-      expect(response).to have_http_status(302)
-    end
-  end
-
-  describe '#show' do
-    it '正常にアクセスできること' do
-      get post_path(post)
-      expect(response).to have_http_status(302)
-    end
-  end
-
-  describe '#edit' do
-    it '正常にアクセスできること' do
-      get edit_post_path(post)
-      expect(response).to have_http_status(302)
-    end
-  end
 end
