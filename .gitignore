@@ -40,3 +40,5 @@
 /.guard_history
 
 ./Diagram.dio
+
+/.env

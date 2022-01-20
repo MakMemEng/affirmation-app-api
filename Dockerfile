@@ -17,6 +17,22 @@ RUN apk update && \
     apk add --no-cache ${RUNTIME_PACKAGES} && \
     apk add --virtual build-dependencies --no-cache ${DEV_PACKAGES} && \
     bundle install -j4 && \
-    apk del build-dependencies
+    apk del build-dependencies && \
+    rm -rf /usr/local/bundle/cache/* \
+    /usr/local/share/.cache/* \
+    /var/cache/* \
+    /tmp/* \
+    /usr/lib/mysqld* \
+    /usr/bin/mysql*
 
 COPY . ./
+
+# Add a script to be executed every time the container starts.
+COPY entrypoint.sh /usr/bin/
+# :chmod +x すべてのユーザーに実行権限を与える,
+RUN chmod +x /usr/bin/entrypoint.sh
+ENTRYPOINT ["entrypoint.sh"]
+
+ADD . ${HOME}
+EXPOSE 8080
+CMD ["bundle", "exec", "rails", "s", "-b", "0.0.0.0", "-p", "8080", "-e", "production"]
